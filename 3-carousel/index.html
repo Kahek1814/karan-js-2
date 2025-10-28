@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    .carousal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .right-icon {
+      cursor: pointer;
+      position: absolute;
+      rotate: 180deg;
+      padding: 12px;
+      background-color: rgb(255, 255, 255);
+      top: 45%;
+      right: 5%;
+      border-radius: 50%;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    .left-icon {
+      cursor: pointer;
+      position: absolute;
+      padding: 12px;
+      background-color: white;
+      top: 45%;
+      left: 5%;
+      border-radius: 50%;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    .dots {
+      cursor: pointer;
+      position: absolute;
+      top: 85%;
+      display: flex;
+      gap: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      justify-content: center;
+      align-items: center;
+      transition: all .5s;
+    }
+
+    .dots p {
+      height: 14px;
+      width: 14px;
+      background-color: rgba(255, 255, 255, 0.517);
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .selected {
+      height: 18px !important;
+      width: 18px !important;
+      background-color: rgba(255, 255, 255, 0.732) !important;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="carousal">
+    <div class="imgContainer">
+      <img src="./p-1.jpg" width="900" height="480px" id="image">
+    </div>
+    <div><img src="chevron_7710487 (1).png" height="24px" alt="left" class="left-icon"></div>
+    <div><img src="chevron_7710487 (1).png" height="24px" alt="right" class="right-icon"></div>
+
+    <div class="dots">
+      <p class="selected"></p>
+      <p></p>
+      <p></p>
+      <p></p>
+      <p></p>
+    </div>
+  </section>
+
+  <script>
+    const imgSrc = ["p-1.jpg", "pexels-eberhardgross-691668.jpg", "pexels-pho-tomass-883344227-34419010.jpg", "pexels-pixabay-280221.jpg", "pexels-pixabay-302820.jpg"];
+    let i = 0;
+    const dots = document.querySelectorAll('.dots p');
+    const imageElement = document.querySelector("#image");
+
+    function updateCarousel() {
+      dots.forEach(dot => dot.classList.remove('selected'));
+      imageElement.src = imgSrc[i];
+      dots[i].classList.add('selected');
+    }
+
+    document.querySelector(".left-icon").addEventListener('click', () => {
+      i = (i === 0) ? imgSrc.length - 1 : i - 1;
+      updateCarousel();
+    });
+
+    document.querySelector(".right-icon").addEventListener('click', () => {
+      i = (i === imgSrc.length - 1) ? 0 : i + 1;
+      updateCarousel();
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        i = index;
+        updateCarousel();
+      });
+    });
+
+    updateCarousel();
+  </script>
+</body>
+
+</html>

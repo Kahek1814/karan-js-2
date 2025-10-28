@@ -1,0 +1,129 @@
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Mona Sans;
+      }
+
+      section {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .heading {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 24px;
+      }
+
+      hr {
+        margin-bottom: 18px;
+      }
+
+      .heading h4 {
+        cursor: pointer;
+        font-weight: 400;
+
+        padding-bottom: 18px;
+      }
+
+      .profile {
+        display: inlineblock;
+      }
+
+      .dashboard {
+        display: none;
+      }
+
+      .settings {
+        display: none;
+      }
+
+      .contacts {
+        display: none;
+      }
+
+      p {
+        font: 300;
+        color: rgba(0, 0, 0, 0.312);
+      }
+
+      .selected {
+        color: #0065ed;
+        border-bottom: 2px solid #0065ed;
+        
+      }
+      p span{
+        font-weight: 400;
+        color: black;
+      }
+      /* borde
+      fontr-bottom: 2px solid #0065ed; */
+    </style>
+  </head>
+
+  <body>
+    <section class="section">
+      <nav class="heading">
+        <h4 class="selected">Profile</h4>
+        <h4>Dashboard</h4>
+        <h4>Settings</h4>
+        <h4>Contacts</h4>
+      </nav>
+      <hr>
+      <div class="paragraphs">
+        <p class="profile">Your profile is where your personal details,<span> preferences, and account information are stored.</span>
+          It gives others an overview of who you are and allows you to manage essential data like your name, email, and
+          profile picture. Keeping your profile up-to-date ensures better communication and a more personalized experience
+          across the platform.</p>
+
+        <p class="dashboard">The dashboard provides a central hub for all your key information and activities. <span>It gives
+          you quick insights, stats, and shortcuts to commonly used tools. </span>Whether you’re tracking progress, managing
+          projects, or reviewing notifications, the dashboard helps you stay organized and focused on your goals.</p>
+
+        <p class="settings">In the settings section, you can customize your experience according to your needs.<span> From
+          adjusting privacy preferences to changing display themes and notification options,</span> this area lets you control
+          how the platform works for you. It’s the best place to tailor your environment for maximum comfort and
+          efficiency.</p>
+          
+        <p class="contacts">The contacts section allows you to manage and organize your connections easily.<span> Here, you can
+          view, add, or remove people, as well as access communication details quickly.</span> Keeping your contacts list updated
+          helps you maintain smooth and effective interactions with your network.</p>
+
+      </div>
+    </section>
+  </body>
+  <script>
+    let i = 0;
+    const headings = document.querySelectorAll('.heading h4 ');
+    const paras = document.querySelectorAll('.paragraphs p');
+    console.log(paras)
+    
+    function updateSelected() {
+      headings.forEach(index => index.classList.remove('selected'))
+      headings[i].classList.add('selected')
+      paras.forEach(index => index.style.display = 'none')
+      paras[i].style.display = "block"
+    }
+
+    headings.forEach((heading, index) => {
+      heading.addEventListener('click', (e) => {
+        i = index;
+        updateSelected();
+      })
+    })
+  </script>
+
+  </html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Mona Sans;
+    }
+
+    body {
+      background-color: rgb(255, 255, 255);
+    }
+
+    .container {
+      width: 75%;
+      margin: 36px auto;
+    }
+
+    .Table-Tittle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .Table-Tittle h2 {
+      margin-bottom: 10px;
+      font-size: 22px;
+      color: #101826;
+    }
+
+    .Table-Tittle p {
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #000000ba;
+    }
+
+    .Table-Tittle button {
+      background-color: #4F46E5;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      text-align: left;
+      border-collapse: collapse;
+    }
+
+    tr th {
+
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+
+    tr td {
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+
+    tr td:last-child {
+      border: none;
+    }
+
+    tr td {
+      color: #00000079;
+    }
+
+    tr td:first-child {
+      color: #101826;
+      font-weight: 600;
+    }
+
+    tr td:last-child {
+      text-align: right;
+    }
+
+    tr {
+      border-bottom: 2px solid #EAECF0;
+    }
+
+    tr:last-child {
+      border-bottom: none;
+    }
+
+    tr th:last-child {
+      text-align: right;
+    }
+
+    .table-header {
+      border-bottom: 1px solid #c6c7ca !important;
+    }
+
+    .delete-btn {
+      border: none;
+      background-color: red;
+      color: white;
+      border-radius: 3px;
+      padding: 3px 5px;
+      display: none;
+    }
+
+    .activate-btn {
+      border: none;
+      background-color: rgb(17, 106, 42);
+      color: white;
+      border-radius: 3px;
+      padding: 3px 5px;
+      display: none;
+    }
+
+    .popup {
+      background-color: white;
+      box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+      border-radius: 8px;
+      z-index: 10;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      grid-template-areas: "di t ci" "di pt ci" "btns btns btns";
+      padding: 18px;
+      width: 40%;
+      display: none;
+    }
+
+    .popup-icon__disable {
+      grid-area: di;
+      box-sizing: content-box;
+      padding: 8px;
+      background-color: rgba(255, 0, 0, 0.227);
+      border-radius: 50%;
+      margin-right: 14px;
+      justify-content: center;
+      align-items: center;
+      place-content: center;
+    }
+
+    .popip-tittle {
+      grid-area: t;
+      padding-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .popup-icon__close {
+      grid-area: ci;
+    }
+
+    .popup-para {
+      grid-area: pt;
+      padding-bottom: 18px;
+      font-weight: 400;
+      color: #000000ba;
+    }
+
+    .popup-buttons {
+      grid-area: btns;
+      display: flex;
+      justify-content: right;
+    }
+
+    .btnPOP {
+      text-align: center;
+      padding: 5px 7px;
+      border: none;
+      background-color: white;
+      align-items: center;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .button-cancel {
+      border: 1px solid #00000053;
+      margin-right: 12px;
+    }
+
+    .button-deactivate {
+
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="container">
+    <section class="Table-Tittle">
+      <div>
+        <h2>Users</h2>
+      </div>
+    </section>
+
+    <table class="table">
+
+      <tbody>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="popup">
+    <img class="popup-icon__disable" src="./image.png" height="24px" width="24px" alt="disbale-icon" />
+    <h3 class="popip-tittle">Deactivate account</h3>
+    <img id="cb" class="popup-icon__close cb" src="./close.png" height="18px" width="18px" alt="close-icon" />
+    <p class="popup-para">Are you sure you want to deactivate your account? All of your data will be permanently removed
+      from our servers
+      forever. This action cannot be undone.</p>
+
+    <div class="popup-buttons">
+      <button id="cb" class="button-cancel btnPOP cb">Cancel</button>
+      <button class="button-deactivate btnPOP">Deactivate</button>
+    </div>
+  </div>
+  
+  
+</body>
+<script>
+  let delteID = '';
+  const close_buttons = document.getElementsByClassName("cb");
+
+  for (let btn of close_buttons) {
+    btn.addEventListener('click', (e) => {
+      document.querySelector(".popup").style.display = "none";
+    });
+  }
+
+  const deactive_button = document.querySelector(".button-deactivate")
+  deactive_button.addEventListener('click', (e) => {
+    data[delteID].isActive = ! data[delteID].isActive;
+    localStorage.setItem('data', JSON.stringify(data));
+    fillTable(data)
+    document.querySelector(".popup").style.display = "none";
+  })
+
+  
+
+
+
+  const data = JSON.parse(localStorage.getItem('data')) || [];
+  console.log(data)
+
+
+
+  function fillTable(data) {
+    const table = document.querySelector(".table");
+    table.innerHTML = `
+      <tr class="table-header"> 
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Company</th>  
+        <th>Email</th>
+        <th>CountryCode</th>
+        <th>Phone No</th>
+        <th>Message</th>
+        <th>Action</th>
+      </tr>`;
+    data.forEach((row, index) => {
+      let tr = "<tr>";
+      for (const key in row) {
+        if (key !== "isActive") {
+          tr += `<td>${row[key]}</td>`;
+        }
+      }
+
+
+      tr += `
+      <td>
+        <button class="delete-btn" data-index="${index}" style="display:${row.isActive ? 'inline-block' : 'none'};">
+          Deactivate
+        </button>
+        <button class="activate-btn" data-index="${index}" style="display:${!row.isActive ? 'inline-block' : 'none'};">
+          Activate
+        </button>
+      </td>
+    `;
+      tr += "</tr>";
+      table.innerHTML += tr;
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        delteID = e.target.getAttribute('data-index')
+        document.querySelector(".popup").style.display = "grid";
+          document.querySelector(".popip-tittle").innerHTML="Deactivate Account"
+        document.querySelector(".popup-para").innerHTML="Are you sure you want to deactivate your account? All of your data will be permanently removed from our servers forever. This action cannot be undone."
+        document.querySelector(".button-deactivate").innerHTML="Deactivated";
+        document.querySelector(".button-deactivate").style.backgroundColor="red";
+      });
+    });
+
+    document.querySelectorAll('.activate-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        delteID = e.target.getAttribute('data-index')
+        const changes= document.querySelector(".popup").style;
+        changes.display="grid";
+        document.querySelector(".popip-tittle").innerHTML="Activate Account"
+        document.querySelector(".popup-para").innerHTML="Are you sure you want to activate your account? All of your data will be permanently restored in our servers forever. This action can be undone."
+        document.querySelector(".button-deactivate").innerHTML="Activate";
+        document.querySelector(".button-deactivate").style.backgroundColor="green";
+      });
+    });
+  }
+
+
+  window.addEventListener('DOMContentLoaded', () => {
+    if (data.length > 0) {
+      fillTable(data);
+    }
+  });
+
+</script>
+
+</html>

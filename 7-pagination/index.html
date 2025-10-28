@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagination</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Mona Sans, sans-serif;
+    }
+
+    .section {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .pageNoArray {
+      position: absolute;
+      top: 90%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+
+    }
+
+    .pageNoArray p {
+      padding: 8px 12px;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .pageNoArray p:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .pageNoArray p:first-child {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+
+    .pageNoArray p:last-child {
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+
+    .disable {
+      cursor: not-allowed;
+      color: grey;
+      opacity: 0.6; 
+    }
+
+    .active {
+      background: rgba(66, 98, 186, 0.212);
+      color: #0065ed;
+
+    }
+  </style>
+</head>
+
+<body>
+  <section class="section">
+    <h1 class="pageno-tittle">Page No <span class="pagNo">1</span></h1>
+  </section>
+
+  <section class="pageNoArray"></section>   
+
+  <script>
+    const pageNoArray = [1, 2, 3, 4, 5, 6];
+    let currPageNO = 1;
+
+    const container = document.querySelector('.pageNoArray');
+    const pageDisplay = document.querySelector('.pagNo');
+
+    function renderPagination() {
+      container.innerHTML = '';
+
+      const prev = document.createElement('p');
+      prev.textContent = 'Previous';
+      if (currPageNO === 1) prev.classList.add('disable');
+      prev.addEventListener('click', () => {
+        if (currPageNO > 1) {
+          currPageNO--;
+          renderPagination();
+        }
+      });
+      container.appendChild(prev);
+
+
+      pageNoArray.forEach(num => {
+        const page = document.createElement('p');
+        page.textContent = num;
+        if (num === currPageNO) page.classList.add('active');
+        page.addEventListener('click', () => {
+          currPageNO = num;
+          renderPagination();
+        });
+        container.appendChild(page);
+      });
+
+
+      const next = document.createElement('p');
+      next.textContent = 'Next';
+      if (currPageNO === pageNoArray[pageNoArray.length - 1]) next.classList.add('disable');
+      next.addEventListener('click', () => {
+        if (currPageNO < pageNoArray[pageNoArray.length - 1]) {
+          currPageNO++;
+          renderPagination();
+        }
+      });
+      container.appendChild(next);
+
+
+      pageDisplay.textContent = currPageNO;
+    }
+
+    renderPagination();
+  </script>
+</body>
+
+</html>

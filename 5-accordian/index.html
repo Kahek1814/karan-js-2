@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Mona Sans;
+    }
+
+    section {
+      width: 45%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .section-article {
+      border: 1px solid rgba(0, 0, 0, 0.346);
+
+
+    }
+
+    .accordian-section {
+      padding: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .img {
+      rotate: 270deg;
+    }
+
+    .text-description {
+      border-top: 1px solid rgba(0, 0, 0, 0.346);
+      
+      display: none;
+      padding: 10px;
+    }
+
+    .selected {}
+
+    .selected h4 {
+      color: #0065ed;
+
+    }
+
+    .selected img {
+      filter: invert(28%) sepia(99%) saturate(5581%) hue-rotate(206deg) brightness(96%) contrast(97%);
+      rotate: 90deg;
+
+    }
+
+    .tittle {
+      font-weight: 400;
+    }
+
+    .section-article+.section-article {
+      border-top: none;
+    }
+
+    .section-article:first-child {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    .section-article:last-child {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="section">
+    <article class="section-article">
+      <div class="accordian-section">
+        <h4 class="tittle">Accordion item #1</h4>
+        <img class="img" src="arrow.png" alt="downArrow" height="18px">
+      </div>
+      <p class="text-description"><strong>This is the first item's accordion body.</strong> It is shown by default,
+        until the collapse
+        plugin adds the appropriate classes that we use to style each element. These classes control the overall
+        appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or
+        overriding our default variables. It's also worth noting that just about any HTML can go within the
+        .accordion-body, though the transition does limit overflow.</p>
+    </article>
+    <article class="section-article">
+      <div class="accordian-section">
+        <h4 class="tittle">Accordion item #2</h4>
+        <img class="img" src="arrow.png" alt="downArrow" height="18px">
+      </div>
+      <p class="text-description">This is the first item's accordion body. It is shown by default, until the collapse
+        plugin adds the appropriate classes that we use to style each element. These classes control the overall
+        appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or
+        overriding our default variables. It's also worth noting that just about any HTML can go within the
+        .accordion-body, though the transition does limit overflow.</p>
+    </article>
+    <article class="section-article">
+      <div class="accordian-section">
+        <h4 class="tittle">Accordion item #3</h4>
+        <img class="img" src="arrow.png" alt="downArrow" height="18px">
+      </div>
+      <p class="text-description">This is the first item's accordion body. It is shown by default, until the collapse
+        plugin adds the appropriate classes that we use to style each element. These classes control the overall
+        appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or
+        overriding our default variables. It's also worth noting that just about any HTML can go within the
+        .accordion-body, though the transition does limit overflow.</p>
+    </article>
+  </section>
+</body>
+<script>
+  const sectionItems = document.querySelectorAll(".section article");
+  let selectedItem = -1;
+
+  sectionItems.forEach((item, index) => {
+    item.addEventListener("click", () => {
+      if (selectedItem === index) {
+        item.classList.remove("selected");
+        item.querySelector(".text-description").style.display = "none";
+        selectedItem = -1;
+        return;
+      }
+
+      sectionItems.forEach(article => {
+        article.classList.remove("selected");
+        article.querySelector(".text-description").style.display = "none";
+      });
+
+      item.classList.add("selected");
+      item.querySelector(".text-description").style.display = "block";
+      selectedItem = index;
+    });
+  });
+</script>
+
+
+</html>
