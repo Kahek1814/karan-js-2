@@ -12,6 +12,7 @@
       padding: 0;
       box-sizing: border-box;
       font-family: Mona Sans;
+
     }
 
     section {
@@ -41,7 +42,7 @@
 
     .text-description {
       border-top: 1px solid rgba(0, 0, 0, 0.346);
-      
+
       display: none;
       padding: 10px;
     }
@@ -75,6 +76,30 @@
     .section-article:last-child {
       border-bottom-left-radius: 8px;
       border-bottom-right-radius: 8px;
+    }
+
+    .text-description {
+      border-top: 1px solid rgba(0, 0, 0, 0.346);
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.4s ease;
+      padding: 0 10px;
+    }
+
+    .selected .text-description {
+      max-height: 400px;
+      opacity: 1;
+      padding: 10px;
+    }
+
+    .accordian-section img {
+      transition: transform 0.4s ease;
+    }
+
+    .selected .accordian-section img {
+      transform: rotate(180deg);
+      filter: invert(28%) sepia(99%) saturate(5581%) hue-rotate(206deg) brightness(96%) contrast(97%);
     }
   </style>
 </head>
