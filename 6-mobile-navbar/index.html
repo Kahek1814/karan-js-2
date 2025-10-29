@@ -11,6 +11,7 @@
 
   <style>
     * {
+         
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -18,6 +19,7 @@
     }
 
     html {
+
       font-size: 10px;
     }
 
@@ -90,56 +92,57 @@
     .icon-mobile-nav[name="close-outline"] {
       display: none;
     }
+@media (max-width: 59em) {
+  .btn-mobile-nav {
+    display: block;
+    z-index: 9999;
+  }
 
-    @media (max-width: 59em) {
-      .btn-mobile-nav {
-        display: block;
-        z-index: 9999;
-      }
+  .main-nav {
+    background-color: rgba(255, 255, 255, 0.97);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 0.5s ease-in;
+    overflow: hidden;
+  }
 
-      .main-nav {
-        background-color: rgba(255, 255, 255, 0.97);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        transform: translateX(100%);
-        opacity: 0;
-        pointer-events: none;
-        visibility: hidden;
-        transition: all 0.5s ease-in;
-      }
+  .nav-open .main-nav {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+  }
 
-      .nav-open .main-nav {
-        transform: translateX(0);
-        opacity: 1;
-        pointer-events: auto;
-        visibility: visible;
-      }
+  .main-nav-list {
+    flex-direction: column;
+    gap: 4.8rem;
+  }
 
-      .main-nav-list {
-        flex-direction: column;
-        gap: 4.8rem;
-      }
+  .main-nav-link:link,
+  .main-nav-link:visited {
+    font-size: 3rem;
+  }
 
-      .main-nav-link:link,
-      .main-nav-link:visited {
-        font-size: 3rem;
-      }
+  .nav-open .icon-mobile-nav[name="menu-outline"] {
+    display: none;
+  }
 
-      .nav-open .icon-mobile-nav[name="menu-outline"] {
-        display: none;
-      }
+  .nav-open .icon-mobile-nav[name="close-outline"] {
+    display: block;
+  }
+}
 
-      .nav-open .icon-mobile-nav[name="close-outline"] {
-        display: block;
-      }
-    }
 
     @media (max-width: 34em) {
       .header {
